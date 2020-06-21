@@ -10,7 +10,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     with conn:
         print('Connected by', addr)
         while True:
-            data = conn.recv(1024)
+            data = conn.recv(1024).decode()
+            print('Received', repr(data))
             if not data:
                 break
-            conn.sendall(data)
+            msg = input().encode()
+            conn.sendall(msg)
